@@ -49,12 +49,11 @@ class __TwigTemplate_07a973cd4f137be8e4c6f4e97325ec36a7c382c4d827b6002a6f637580d
     <div id=\"header\" class=\"jumbotron\">
       <h1>Ma plateforme d'annonces</h1>
       <p>
-        Ce projet est propulsé par Symfony,
-        et construit grâce au MOOC OpenClassrooms et SensioLabs.
+        Projet Plateforme d'annonces Symfony PHP
       </p>
       <p>
-        <a class=\"btn btn-primary btn-lg\" href=\"https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2\">
-          Participer au MOOC »
+        <a class=\"btn btn-primary btn-lg\" href=#>
+          Bouton pour faire qqh, vide pour l'instant »
         </a>
       </p>
     </div>
@@ -64,26 +63,26 @@ class __TwigTemplate_07a973cd4f137be8e4c6f4e97325ec36a7c382c4d827b6002a6f637580d
         <h3>Les annonces</h3>
         <ul class=\"nav nav-pills nav-stacked\">
           <li><a href=\"";
-        // line 36
+        // line 35
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("oc_platform_home");
         echo "\">Accueil</a></li>
           <li><a href=\"";
-        // line 37
+        // line 36
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("oc_platform_add");
         echo "\">Ajouter une annonce</a></li>
         </ul>
 
         <h4>Dernières annonces</h4>
         ";
-        // line 41
+        // line 40
         echo $this->env->getRuntime('Symfony\Bridge\Twig\Extension\HttpKernelRuntime')->renderFragment(Symfony\Bridge\Twig\Extension\HttpKernelExtension::controller("OCPlatformBundle:Advert:menu", array("limit" => 3)));
         echo "
       </div>
       <div id=\"content\" class=\"col-md-9\">
         ";
-        // line 44
+        // line 43
         $this->displayBlock('body', $context, $blocks);
-        // line 46
+        // line 45
         echo "      </div>
     </div>
 
@@ -91,16 +90,16 @@ class __TwigTemplate_07a973cd4f137be8e4c6f4e97325ec36a7c382c4d827b6002a6f637580d
 
     <footer>
       <p>The sky's the limit © ";
-        // line 52
+        // line 51
         echo twig_escape_filter($this->env, twig_date_format_filter($this->env, "now", "Y"), "html", null, true);
         echo " and beyond.</p>
     </footer>
   </div>
 
   ";
-        // line 56
+        // line 55
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 61
+        // line 60
         echo "
 </body>
 </html>";
@@ -152,7 +151,7 @@ class __TwigTemplate_07a973cd4f137be8e4c6f4e97325ec36a7c382c4d827b6002a6f637580d
 
     }
 
-    // line 44
+    // line 43
     public function block_body($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
@@ -161,7 +160,7 @@ class __TwigTemplate_07a973cd4f137be8e4c6f4e97325ec36a7c382c4d827b6002a6f637580d
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
-        // line 45
+        // line 44
         echo "        ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -171,7 +170,7 @@ class __TwigTemplate_07a973cd4f137be8e4c6f4e97325ec36a7c382c4d827b6002a6f637580d
 
     }
 
-    // line 56
+    // line 55
     public function block_javascripts($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
@@ -180,9 +179,9 @@ class __TwigTemplate_07a973cd4f137be8e4c6f4e97325ec36a7c382c4d827b6002a6f637580d
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 57
+        // line 56
         echo "    ";
-        // line 58
+        // line 57
         echo "    <script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js\"></script>
     <script src=\"//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js\"></script>
   ";
@@ -206,7 +205,7 @@ class __TwigTemplate_07a973cd4f137be8e4c6f4e97325ec36a7c382c4d827b6002a6f637580d
 
     public function getDebugInfo()
     {
-        return array (  186 => 58,  184 => 57,  175 => 56,  165 => 45,  156 => 44,  145 => 13,  143 => 12,  134 => 11,  116 => 9,  104 => 61,  102 => 56,  95 => 52,  87 => 46,  85 => 44,  79 => 41,  72 => 37,  68 => 36,  45 => 15,  43 => 11,  38 => 9,  29 => 2,);
+        return array (  185 => 57,  183 => 56,  174 => 55,  164 => 44,  155 => 43,  144 => 13,  142 => 12,  133 => 11,  115 => 9,  103 => 60,  101 => 55,  94 => 51,  86 => 45,  84 => 43,  78 => 40,  71 => 36,  67 => 35,  45 => 15,  43 => 11,  38 => 9,  29 => 2,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -240,12 +239,11 @@ class __TwigTemplate_07a973cd4f137be8e4c6f4e97325ec36a7c382c4d827b6002a6f637580d
     <div id=\"header\" class=\"jumbotron\">
       <h1>Ma plateforme d'annonces</h1>
       <p>
-        Ce projet est propulsé par Symfony,
-        et construit grâce au MOOC OpenClassrooms et SensioLabs.
+        Projet Plateforme d'annonces Symfony PHP
       </p>
       <p>
-        <a class=\"btn btn-primary btn-lg\" href=\"https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2\">
-          Participer au MOOC »
+        <a class=\"btn btn-primary btn-lg\" href=#>
+          Bouton pour faire qqh, vide pour l'instant »
         </a>
       </p>
     </div>
