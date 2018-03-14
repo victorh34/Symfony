@@ -11,3 +11,4 @@ composer.phar
 
 
 # End of https://www.gitignore.io/api/composer
+app/config/parameters.yml

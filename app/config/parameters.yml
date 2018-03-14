@@ -10,4 +10,3 @@ parameters:
     mailer_user: null
     mailer_password: null
     secret: b2363a6ffed8e14dd2bb9e74ad97a575acf6d47a
-    webmaster: ErpapiRico
