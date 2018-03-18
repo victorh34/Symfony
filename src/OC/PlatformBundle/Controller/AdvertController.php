@@ -5,6 +5,9 @@
 namespace OC\PlatformBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use OC\PlatformBundle\Entity\Advert;
+use OC\PlatformBundle\Entity\Image;
+use OC\PlatformBundle\Entity\Application;
 use Symfony\Component\HttpFoundation\Response; //Pour pouvoir donner une réponse 
 use Symfony\Component\HttpFoundation\Request; //Pour récupérer les paramètres de l url
 use Symfony\Component\HttpFoundation\RedirectResponse; //Pour la rédirection des pages.
@@ -69,33 +72,84 @@ class AdvertController extends Controller
     // correspondre au paramètre {id} de la route
     public function viewAction($id, Request $request)
     {
-	    $advert = array(
-	      'title'   => 'Recherche développpeur Symfony2',
-	      'id'      => $id,
-	      'author'  => 'Alexandre',
-	      'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
-	      'date'    => new \Datetime()
-	    );
+	    // On récupère le repository
+    	$repository = $this->getDoctrine()
+     	  ->getManager()
+    	  ->getRepository('OCPlatformBundle:Advert')
+    	;
+		// C est la meme chose ----------------------
+  //   	$advert = $this->getDoctrine()
+		//   ->getManager()
+		//   ->find('OCPlatformBundle:Advert', $id)
+		// ;
+		//-------------------------------------------
+	    // On récupère l'entité correspondante à l'id $id
+    	$advert = $repository->find($id);
+	    $repository->findBy(array('advert' => $advert));
+    	// $advert est donc une instance de OC\PlatformBundle\Entity\Advert
+	    // ou null si l'id $id  n'existe pas, d'où ce if :
+	    if (null === $advert) {
+	    	throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
+	    }
 
-
-	    return $this->render('OCPlatformBundle:Advert:view.html.twig', array('advert'  => $advert
+	    return $this->render('OCPlatformBundle:Advert:view.html.twig', array('advert'  => $advert,
+	    		  'listApplications' => $listApplications
 	    ));
     }
 
     public function addAction(Request $request)
     {
-    	//----------------------
+    	//-------------------------------------------------------
     	//utiliser le service antispam que j ai cree
 	    // On récupère le service
 	    $antispam = $this->container->get('oc_platform.antispam');
-
 	    // Je pars du principe que $text contient le texte d'un message quelconque
-	    $text = '...';
-	    if ($antispam->isSpam($text)) {
-	      throw new \Exception('Votre message a été détecté comme spam !');
-		}
-	    //----------------------
-	    
+		//    $text = '...';
+		//    if ($antispam->isSpam($text)) {
+		//      throw new \Exception('Votre message a été détecté comme spam !');
+		// }
+	    //-------------------------------------------------------
+
+	    // Création de l'entité
+	    $advert = new Advert();
+	    $advert->setTitle('Recherche développeur Symfony.');
+	    $advert->setAuthor('Alexandre');
+	    $advert->setContent("Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…");
+	    // On peut ne pas définir ni la date ni la publication,
+	    // car ces attributs sont définis automatiquement dans le constructeur
+
+	    // Création d'une première candidature
+	    $application1 = new Application();
+	    $application1->setAuthor('Marine');
+	    $application1->setContent("J'ai toutes les qualités requises.");
+	    // Création d'une deuxième candidature par exemple
+	    $application2 = new Application();
+	    $application2->setAuthor('Pierre');
+	    $application2->setContent("Je suis très motivé.");
+	    // On lie les candidatures à l'annonce
+	    $application1->setAdvert($advert);
+	    $application2->setAdvert($advert);
+
+	    // Création de l'entité Image
+	    $image = new Image();
+	    $image->setUrl('http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg');
+	    $image->setAlt('Job de rêve');
+	    // On lie l'image à l'annonce
+	    $advert->setImage($image);
+
+	    // On récupère l'EntityManager
+	    $em = $this->getDoctrine()->getManager();
+	    // Étape 1 : On « persiste » l'entité
+	    $em->persist($advert);
+		    
+		// Étape 1 ter : pour cette relation pas de cascade lorsqu'on persiste Advert, car la relation est
+	    // définie dans l'entité Application et non Advert. On doit donc tout persister à la main ici.
+	    $em->persist($application1);
+	    $em->persist($application2);
+
+	    // Étape 2 : On « flush » tout ce qui a été persisté avant
+	    $em->flush();
+
 	    // La gestion d'un formulaire est particulière, mais l'idée est la suivante :
 	    // Si la requête est en POST, c'est que le visiteur a soumis le formulaire
 	    if ($request->isMethod('POST')) {
