@@ -128,6 +128,7 @@ class AdvertController extends Controller
 	    $advert = new Advert();
 	    $advert->setTitle('Recherche développeur Symfony.');
 	    $advert->setAuthor('Alexandre');
+	    $advert->setEmail('victoraizpurua@gmail.com');
 	    $advert->setContent("Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…");
 	    // On peut ne pas définir ni la date ni la publication,
 	    // car ces attributs sont définis automatiquement dans le constructeur
