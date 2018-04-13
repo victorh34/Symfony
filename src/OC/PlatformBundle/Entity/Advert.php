@@ -4,6 +4,7 @@ namespace OC\PlatformBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Advert
@@ -34,11 +35,12 @@ class Advert
     {
         // Par défaut, la date de l'annonce est la date d'aujourd'hui
         $this->date = new \Datetime();
-        // Comme la propriété $categories doit être un ArrayCollection,
+        // Comme la propriété $categories et applications doit être un ArrayCollection,
         // On doit la définir dans un constructeur :
         $this->categories = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
-
+    
     /**
      * @var int
      *
@@ -72,7 +74,7 @@ class Advert
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
 
@@ -97,6 +99,12 @@ class Advert
      * @ORM\Column(name="nb_applications", type="integer")
      */
     private $nbApplications = 0;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     */
+    private $slug;
 
     /**
      * Get id
@@ -418,5 +426,29 @@ class Advert
     public function getNbApplications()
     {
         return $this->nbApplications;
+    }
+
+    /**
+     * Set slug.
+     *
+     * @param string $slug
+     *
+     * @return Advert
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug.
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
